@@ -19,6 +19,11 @@
         components: {
             'grid-node': GridNode
         },
+        props: {
+            colors: {
+                type: Array
+            },
+        },
         data: () => ({
             x: 11,
             y: 13
@@ -33,13 +38,7 @@
                     .forEach((node) => node.changeBg(this.randomColor()));
             },
             randomColor() {
-                const colors = [
-                    'green',
-                    'red',
-                    'orange',
-                ];
-
-                return colors[Math.floor(Math.random() * colors.length)];
+                return this.colors[Math.floor(Math.random() * this.colors.length)];
             }
         }
     }
@@ -54,13 +53,20 @@
     .grid .grid__row {
         display: flex;
         flex-direction: row;
+        justify-content: space-around;
     }
 
     .grid .grid__row .grid__node {
-        margin: 1px;
-        height: 50px;
         flex: 1 0 auto;
+        height: auto;
+        margin: 2px;
         text-align: center;
+    }
+
+    .grid .grid__row .grid__node:before {
+        content: '';
+        float: left;
+        padding-top: 100%;
     }
 
     .grid .grid__node {
